@@ -44,6 +44,18 @@ class TodoList { //updated
         await this.saveListToDisk()
   }
 
+    /**
+     * Editar um item
+     */
+     async editItem(index: number, newTitle: string) {
+        
+        
+        const items = await this.items;
+        items.splice(index, 1, new Item(newTitle));
+        await this.saveListToDisk();
+
+     }
+
 
     /**
      * Remove um item da lista de item pelo índice
@@ -64,6 +76,7 @@ class TodoList { //updated
     }
     
 }
+
 
 export default TodoList
 export { Item, TodoList }

@@ -61,6 +61,32 @@ if (command === 'remove') {
     process.exit(0)
 }
 
+//edit
+
+if (command === 'update') {
+
+    const indexStr = params[3] //logica : 3 parametro sendo o numero
+    const value = params[4]    // e o quarto sendo o texto
+
+    if (indexStr === undefined) { // para não bugar o bglh do parse
+        console.error('Índice do item a ser removido não pode ser nulo ou vazio')
+        process.exit(1)
+    }
+
+    if (value === undefined || value === null) {
+        console.error('Valor do item não pode ser nulo ou vazio')
+        process.exit(1)
+    }
+
+    const index = parseInt(indexStr)
+
+    await todolist.editItem(index, value!)
+    
+    console.log(`Item editado com sucesso:`, value)
+    process.exit(0)
+
+}
+
 
 // add
 
@@ -85,6 +111,7 @@ if (command === 'add') {
 
 }
 
+
 // unknown command
 
 if (command)
@@ -93,5 +120,6 @@ if (command)
 console.log(`Comandos disponíveis:
 - add <item>: Adiciona um item à lista
 - remove <index>: Remove um item da lista por indice
+- update <index> <item>: Edita um item da lista por indice
 - list: Lista os itens atuais
 `)
